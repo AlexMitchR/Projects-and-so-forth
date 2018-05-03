@@ -1,0 +1,69 @@
+package edu.uwm.cs351;
+
+public class Point {
+	final double _x;
+	final double _y;
+	
+	public Point(double x, double y) {
+		// TODO
+		this._x = x;
+		this._y = y;
+		
+	}
+	
+	// Getters for _x and _y (see assignment)
+	public double x(){
+		return this._x;
+	}
+	
+	public double y(){
+		return this._y;
+	}
+	
+	/**
+	 * Round this point to the closest AWT point (using integer coordinates).
+	 * @return rounded point
+	 */
+	public java.awt.Point asAWT() {
+		// TODO
+		int x = (int)Math.round(this._x);
+		int y = (int)Math.round(this._y);
+		return new java.awt.Point(x,y);
+		
+		
+	}
+	
+	/**
+	 * Compute the distance (always positive) between two points.
+	 * @param other another point, must not be null
+	 * @return distance between points.
+	 */
+	public double distance(Point other) {
+		// TODO
+		double p1x = this._x;
+		double p1y = this._y;
+		
+		
+		
+		
+		
+		double p2x = other.x();
+		double p2y = other.y();
+		
+		double xDist = p2x - p1x;
+		double yDist = p2y - p1y;
+		
+		double dist = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+		return dist;
+	}
+	
+	/**
+	 * Return string of the form (x,y)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		// TODO
+		return "(" + this._x + "," + this._y + ")";
+	}
+}
