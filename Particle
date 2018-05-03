@@ -2,14 +2,7 @@ package edu.uwm.cs351;
 
 import java.awt.Color;
 import java.awt.Graphics;
-//I collaborated with the following people:
-//Parker Carlson: We discussed various methods within the Particle, Point, and Vector classes
-//Alexander Seinfeld: We discussed a few methods within the Point class.
-//Wendy Sebastian: Discussed the gravForceOn method within the Particle class.
-//Erin Fink: Helped me conceptualize the draw() method. 
-//Any similarities within our code (if any) are unintentional, however, our methods
-//of solving are similar.
-/**
+
  * Representation of a point mass moving in two dimensional space.
  * A particle has a location (a point), velocity (a vector), a mass (double)
  * and a color.  The mass and color never change.
