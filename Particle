@@ -1,0 +1,113 @@
+package edu.uwm.cs351;
+
+import java.awt.Color;
+import java.awt.Graphics;
+//I collaborated with the following people:
+//Parker Carlson: We discussed various methods within the Particle, Point, and Vector classes
+//Alexander Seinfeld: We discussed a few methods within the Point class.
+//Wendy Sebastian: Discussed the gravForceOn method within the Particle class.
+//Erin Fink: Helped me conceptualize the draw() method. 
+//Any similarities within our code (if any) are unintentional, however, our methods
+//of solving are similar.
+/**
+ * Representation of a point mass moving in two dimensional space.
+ * A particle has a location (a point), velocity (a vector), a mass (double)
+ * and a color.  The mass and color never change.
+ */
+public class Particle {
+	volatile Point _position; // must be "volatile" because of animation (not for other fields)
+	// TODO: more fields.
+	Vector _velocity;
+	final double _mass;
+	final Color _color;
+	
+	
+	/**
+	 * Create a new particle with the given position, velocity, mass and color
+	 * @param p position (location) of particle initially
+	 * @param v velocity of particle initially
+	 * @param m mass of particle
+	 * @param c color of particle
+	 */
+	public Particle(Point p, Vector v, double m, Color c) {
+		// TODO
+		this._position = p;
+		this._velocity = v;
+		this._mass = m;
+		this._color = c;
+		
+	}
+	
+	public Point getPosition() {
+		// TODO
+		return this._position;
+	}
+	
+	public Vector getVelocity() {
+		// TODO
+		return this._velocity;
+		
+	}
+	
+	/**
+	 * Estimate the location of the particle after one unit of time by 
+	 * letting it move at a constant velocity for that time from its starting
+	 * position.  Essentially that simply means we apply the velocity as a vector
+	 * to the particles current position.
+	 */
+	public void move() {
+		// TODO
+		_position = _velocity.move(_position);
+		
+	}
+	
+	/**
+	 * Draw the particle at its current position as a small circle.  The area of the circle
+	 * is proportional to the mass: the radius of the circle is the square root of the mass.  
+	 * @param g graphics context (must not be null)
+	 */
+	public void draw(Graphics g) {
+		// TODO
+		double _radius = Math.sqrt(_mass);
+		int x = (int)this._position.x();
+		int y = (int)this._position.y();
+		int r = (int)_radius;
+		
+		g.fillOval((x - r), (y - r), (2 * r), (2 * r));
+		
+		
+	}
+
+	private static final double G = 1;
+
+	/**
+	 * Compute the Newtonian gravitational force that this particle exerts on the other.
+	 */
+	public Vector gravForceOn(Particle other) {
+		// TODO;
+		double m1 = this._mass;
+		double m2 = other._mass;
+		
+		double topE = ( G * m1 * m2);
+		
+		double dist = Math.pow(other._position.distance(this._position), 2);
+		
+		Vector norm = new Vector(other._position, this._position);
+		
+		
+		Vector norm2 = norm.normalize().scale(topE / dist);
+		
+		return norm2;
+		
+	}
+	
+	/**
+	 * Apply a force as an acceleration on the velocity (after dividing by the mass).
+	 * This velocity is affected as though one applied the constant acceleration for one time unit.
+	 * @param force force applied, must not be null
+	 */
+	public void applyForce(Vector force) {
+		// TODO
+		_velocity = getVelocity().add(force.scale(1/_mass));
+	}
+}
